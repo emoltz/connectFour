@@ -1,7 +1,10 @@
+:root{
+    --emptyBlock: rgb(229,229,229);
+}
 .board button {
     width: 100px;
     height: 100px;
-    /*background-color: gray;*/
+    background-color: var(--emptyBlock);
     border-radius: 50%;
     border: 4px solid black; /*this gets rid of bootstrap shadow*/
     margin: 1px;
