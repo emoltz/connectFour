@@ -17,11 +17,6 @@ function reportWin(rowNum, colNum) {
 }
 
 function changeColor(rowIndex, colIndex, color) {
-    if (color === player1Color) {
-        console.log(`${player1} played`);
-    } else {
-        console.log(`${player2} played`);
-    }
     return table.eq(rowIndex).find('td').eq(colIndex).find('button').css('background-color', color);
 }
 
@@ -30,6 +25,7 @@ function returnColor(rowIndex, colIndex) {
 }
 
 function checkBottom(colIndex) {
+    //needed?
     let colorReport = "";
     for (let row = 5; row >= 0; row--) {
         colorReport = returnColor(row, colIndex);
@@ -51,3 +47,55 @@ function winCheck() {
 
     //diagonal
 }
+
+// JQUERY LOGIC
+// Starting with Player1
+let currentPlayer = 1;
+let currentName = player1;
+let currentColor = player1Color;
+
+$('h3').text(currentName + " player, it's your turn.");
+
+$('.board button').on('click', function (){
+    let col = $(this).closest('td').index();
+
+    let bottomAvail = checkBottom(col);
+
+    changeColor(bottomAvail, col, currentColor);
+
+    if (winCheck() === true){
+        $('h2').text(currentName + " wins!");
+        $('.btn-lg').toggleClass('glow');
+    }
+
+    currentPlayer = currentPlayer * -1;
+    console.log(currentPlayer);
+    if(currentPlayer === 1){
+        console.log(player1);
+        currentName = player1; //blue
+        $('h3').text(currentName + " player, it's your turn.").removeClass('text-danger').addClass('text-primary');
+        currentColor = player1Color;
+    }
+    else{
+        console.log(player2);
+        currentName = player2;
+        $('h3').text(currentName + " player, it's your turn.").removeClass('text-primary').addClass('text-danger');
+
+        currentColor = player2Color;
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
