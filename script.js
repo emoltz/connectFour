@@ -41,12 +41,40 @@ function colorMatchCheck(one, two, three, four) {
 }
 
 function winCheck() {
-    // TODO: logic for winning. After each move, we'll call this function to check if there is a win
     //horizontal
-
+    for (let row = 0; row < 6; row++) {
+        for (let col = 0; col < 4; col++) {
+            if (colorMatchCheck(returnColor(row,col), returnColor(row,col+1) ,returnColor(row,col+2), returnColor(row,col+3))) {
+                console.log('horiz');
+                reportWin(row,col);
+                return true;
+            }
+        }
+    }
     //vertical
-
+    for (let col = 0; col < 7; col++) {
+        for (let row = 0; row < 3; row++) {
+            if (colorMatchCheck(returnColor(row,col), returnColor(row+1,col) ,returnColor(row+2,col), returnColor(row+3,col))) {
+                console.log('vertical');
+                reportWin(row,col);
+                return true;
+            }
+        }
+    }
     //diagonal
+    for (let col = 0; col < 5; col++) {
+        for (let row = 0; row < 7; row++) {
+            if (colorMatchCheck(returnColor(row,col), returnColor(row+1,col+1) ,returnColor(row+2,col+2), returnColor(row+3,col+3))) {
+                console.log('diag');
+                reportWin(row,col);
+                return true;
+            }else if (colorMatchCheck(returnColor(row,col), returnColor(row-1,col+1) ,returnColor(row-2,col+2), returnColor(row-3,col+3))) {
+                console.log('diag');
+                reportWin(row,col);
+                return true;
+            }
+        }
+    }
 }
 
 // JQUERY LOGIC
@@ -86,6 +114,17 @@ $('.board button').on('click', function (){
     }
 });
 
+$('.btn-lg').on('click',function (){
+    console.log("play again clicked");
+    $('.btn-lg').removeClass('glow');
+
+    //change all buttons  back to grey
+    for(let i = 0; i <= 5; i++){
+        for(let j = 0; j <=6; j++){
+            changeColor(i,j,grey);
+        }
+    }
+});
 
 
 
