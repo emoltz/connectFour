@@ -1,5 +1,5 @@
 console.log("https://github.com/emoltz/connectFour");
-
+let gameOver = false;
 const player1 = "Blue";
 const player1Color = 'rgb(86,151,255)';
 
@@ -89,35 +89,43 @@ $('.board button').on('click', function (){
     let col = $(this).closest('td').index();
 
     let bottomAvail = checkBottom(col);
+    if(!gameOver){
+        changeColor(bottomAvail, col, currentColor);
+    }
 
-    changeColor(bottomAvail, col, currentColor);
 
     if (winCheck() === true){
         $('h2').text(currentName + " wins!");
         $('.btn-lg').toggleClass('glow');
+        $('h3').text("");
+        gameOver = true;
     }
 
-    currentPlayer = currentPlayer * -1;
-    console.log(currentPlayer);
-    if(currentPlayer === 1){
-        console.log(player1);
-        currentName = player1; //blue
-        $('h3').text(currentName + " player, it's your turn.").removeClass('text-danger').addClass('text-primary');
-        currentColor = player1Color;
-    }
-    else{
-        console.log(player2);
-        currentName = player2;
-        $('h3').text(currentName + " player, it's your turn.").removeClass('text-primary').addClass('text-danger');
+    if(!gameOver){
 
-        currentColor = player2Color;
+        currentPlayer = currentPlayer * -1;
+        console.log(currentPlayer);
+        if(currentPlayer === 1){
+            console.log(player1);
+            currentName = player1; //blue
+            $('h3').text(currentName + " player, it's your turn.").removeClass('text-danger').addClass('text-primary');
+            currentColor = player1Color;
+        }
+        else{
+            console.log(player2);
+            currentName = player2;
+            $('h3').text(currentName + " player, it's your turn.").removeClass('text-primary').addClass('text-danger');
+
+            currentColor = player2Color;
+        }
     }
+
 });
 
 $('.btn-lg').on('click',function (){
     console.log("play again clicked");
     $('.btn-lg').removeClass('glow');
-
+    gameOver = false;
     //change all buttons  back to grey
     for(let i = 0; i <= 5; i++){
         for(let j = 0; j <=6; j++){
