@@ -4,7 +4,7 @@ const player1 = "Blue";
 const player1Color = 'rgb(86,151,255)';
 
 // const grey = 'rgb(229,229,229)';
-const grey = getComputedStyle(document.documentElement).getPropertyValue('--emptyBlock');
+const grey = 'rgb(229, 229, 229)';
 
 const player2 = "Red";
 const player2Color = 'rgb(237,45,73)';
@@ -17,6 +17,7 @@ function reportWin(rowNum, colNum) {
 }
 
 function changeColor(rowIndex, colIndex, color) {
+    console.log("color changed");
     return table.eq(rowIndex).find('td').eq(colIndex).find('button').css('background-color', color);
 }
 
