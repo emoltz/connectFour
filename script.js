@@ -126,6 +126,7 @@ $('.btn-lg').on('click',function (){
     console.log("play again clicked");
     $('.btn-lg').removeClass('glow');
     gameOver = false;
+    $('h2').text("A Game of Extreme Skill");
     //change all buttons  back to grey
     for(let i = 0; i <= 5; i++){
         for(let j = 0; j <=6; j++){
