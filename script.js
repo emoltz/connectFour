@@ -9,7 +9,6 @@ const grey = 'rgb(229, 229, 229)';
 const player2 = "Red";
 const player2Color = 'rgb(237,45,73)';
 
-let game_on = true;
 let table = $('table tr');
 
 function reportWin(rowNum, colNum) {
@@ -84,13 +83,47 @@ let currentPlayer = 1;
 let currentName = player1;
 let currentColor = player1Color;
 
-$('h3').text("Game Start");
+let lastPiece = null;
+class lastChangedPiece{
+    _undone;
+    constructor(bottomAvail, col, currentColor) {
+        this._bottomAvail = bottomAvail;
+        this._col = col;
+        this._currentColor = currentColor;
+        this._undone = false;
+    }
+
+    undoColor(){
+        if (this._currentColor !== grey){
+            changeColor(this._bottomAvail, this._col, grey);
+        }
+        this._undone = true;
+    }
+}
+
+function switchPlayer(){
+    currentPlayer = currentPlayer * -1;
+    if(currentPlayer === 1){
+        console.log(player1);
+        currentName = player1; //blue
+        $('h3').text(currentName + " player, it's your turn.").removeClass('text-danger').addClass('text-primary');
+        currentColor = player1Color;
+    }
+    else{
+        console.log(player2);
+        currentName = player2;
+        $('h3').text(currentName + " player, it's your turn.").removeClass('text-primary').addClass('text-danger');
+
+        currentColor = player2Color;
+    }
+}
 
 $('.board button').on('click', function (){
     let col = $(this).closest('td').index();
 
     let bottomAvail = checkBottom(col);
     if(!gameOver){
+        lastPiece = new lastChangedPiece(bottomAvail, col, currentColor);
         changeColor(bottomAvail, col, currentColor);
     }
 
@@ -104,26 +137,18 @@ $('.board button').on('click', function (){
 
     if(!gameOver){
 
-        currentPlayer = currentPlayer * -1;
-        console.log(currentPlayer);
-        if(currentPlayer === 1){
-            console.log(player1);
-            currentName = player1; //blue
-            $('h3').text(currentName + " player, it's your turn.").removeClass('text-danger').addClass('text-primary');
-            currentColor = player1Color;
-        }
-        else{
-            console.log(player2);
-            currentName = player2;
-            $('h3').text(currentName + " player, it's your turn.").removeClass('text-primary').addClass('text-danger');
-
-            currentColor = player2Color;
-        }
+        switchPlayer();
     }
-
 });
 
-$('.btn-lg').on('click',function (){
+$('#undo').on('click',function(){
+    lastPiece.undoColor();
+    if(lastPiece._undone){
+        switchPlayer();
+    }
+
+})
+$('#playAgain').on('click',function (){
     console.log("play again clicked");
     $('.btn-lg').removeClass('glow');
     gameOver = false;
