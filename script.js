@@ -130,7 +130,7 @@ $('.board button').on('click', function (){
 
     if (winCheck() === true){
         $('h3').text(currentName + " wins!");
-        $('.btn-lg').toggleClass('glow');
+        $('#playAgain').toggleClass('glow');
         // $('h3').text("");
         gameOver = true;
     }
