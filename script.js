@@ -75,6 +75,7 @@ function winCheck() {
             }
         }
     }
+    return false;
 }
 
 // JQUERY LOGIC
@@ -83,7 +84,7 @@ let currentPlayer = 1;
 let currentName = player1;
 let currentColor = player1Color;
 
-$('h3').text(currentName + " player, it's your turn.");
+$('h3').text("Game Start");
 
 $('.board button').on('click', function (){
     let col = $(this).closest('td').index();
@@ -95,9 +96,9 @@ $('.board button').on('click', function (){
 
 
     if (winCheck() === true){
-        $('h2').text(currentName + " wins!");
+        $('h3').text(currentName + " wins!");
         $('.btn-lg').toggleClass('glow');
-        $('h3').text("");
+        // $('h3').text("");
         gameOver = true;
     }
 
@@ -127,6 +128,7 @@ $('.btn-lg').on('click',function (){
     $('.btn-lg').removeClass('glow');
     gameOver = false;
     $('h2').text("A Game of Extreme Skill");
+    $('h3').text("Game Start");
     //change all buttons  back to grey
     for(let i = 0; i <= 5; i++){
         for(let j = 0; j <=6; j++){
