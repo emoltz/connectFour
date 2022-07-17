@@ -2,7 +2,6 @@
 This project's purpose is to get me more comfortable with jQuery. I will build a working Connect Four game with HTML, javascript, and jQuery. 
 
 ## Site: [https://emoltz.github.io/connectFour/](https://emoltz.github.io/connectFour/)
-<img width="1322" alt="Screen Shot 2022-07-12 at 4 54 29 PM" src="https://user-images.githubusercontent.com/33405530/178593438-52dfac19-615b-4eb6-82bb-8a34a54380a6.png">
 <img width="1002" alt="Screen Shot 2022-07-14 at 5 11 49 PM" src="https://user-images.githubusercontent.com/33405530/179086929-53ab2b8d-de49-4d53-ab48-2a2633e3ff18.png">
 
 
@@ -13,3 +12,6 @@ Got it fully working. Not too difficult actually. Used jQuery to change the colo
 
 ## July 14 2022
 Made it mobile ready, which is great! All the logic seems to be working well. I'd like to add animations at some point but I'm not sure how to do that right now.
+
+## July 15, 2022
+Added an undo button and fixed a couple bugs
